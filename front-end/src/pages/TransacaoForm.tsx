@@ -108,19 +108,30 @@ export function TransacaoForm() {
     }
 
     try {
+      const dataStr = transacao.data || new Date().toISOString().split('T')[0];
+      const dataObj = new Date(dataStr);
+      const dataISO = dataObj.toISOString();
+      
+      const transacaoEnvio = {
+        ...transacao,
+        data: dataISO,
+      };
+
       if (id) {
-        await transacaoService.atualizar(Number(id), transacao);
+        await transacaoService.atualizar(Number(id), transacaoEnvio);
       } else {
-        await transacaoService.criar(transacao);
+        await transacaoService.criar(transacaoEnvio);
       }
       navigate('/transacoes');
-    } catch (err: any) {
-      if (err instanceof TransacaoServiceError) {
-        setErro(err.message);
+    } catch (error: unknown) {
+      if (error instanceof TransacaoServiceError) {
+        setErro(error.message);
+      } else if (error instanceof Error) {
+        setErro(error.message || 'Erro ao salvar transação');
       } else {
-        setErro(err.message || 'Erro ao salvar transação');
+        setErro('Erro ao salvar transação');
       }
-      console.error(err);
+      console.error(error);
     }
   };
 
@@ -254,6 +265,28 @@ export function TransacaoForm() {
             onChange={handleChange}
             step="0.01"
             min="0.01"
+            style={{
+              width: '100%',
+              padding: '8px',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '14px',
+              boxSizing: 'border-box',
+            }}
+            required
+          />
+        </div>
+
+        <div style={{ marginBottom: '20px' }}>
+          <label htmlFor="data" style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>
+            Data *
+          </label>
+          <input
+            type="date"
+            id="data"
+            name="data"
+            value={transacao.data}
+            onChange={handleChange}
             style={{
               width: '100%',
               padding: '8px',

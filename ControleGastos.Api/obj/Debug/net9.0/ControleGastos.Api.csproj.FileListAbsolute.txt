@@ -147,3 +147,4 @@ C:\Lucas\ControleDeGastos\ControleGastos.Api\obj\Debug\net9.0\refint\ControleGas
 C:\Lucas\ControleDeGastos\ControleGastos.Api\obj\Debug\net9.0\ControleGastos.Api.pdb
 C:\Lucas\ControleDeGastos\ControleGastos.Api\obj\Debug\net9.0\ControleGastos.Api.genruntimeconfig.cache
 C:\Lucas\ControleDeGastos\ControleGastos.Api\obj\Debug\net9.0\ref\ControleGastos.Api.dll
+C:\Lucas\ControleDeGastos\ControleGastos.Api\obj\Debug\net9.0\ControleGastos.Api.sourcelink.json

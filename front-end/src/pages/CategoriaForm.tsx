@@ -37,7 +37,7 @@ export function CategoriaForm() {
     if (name === 'finalidade') {
       setCategoria({
         ...categoria,
-        finalidade: Number(value) as any,
+        finalidade: Number(value) as FinalidadeCategoria,
       });
     } else {
       setCategoria({
@@ -63,9 +63,13 @@ export function CategoriaForm() {
         await categoriaService.criar(categoria);
       }
       navigate('/categorias');
-    } catch (err: any) {
-      setError(err.message || 'Erro ao salvar categoria');
-      console.error(err);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('Erro ao salvar categoria');
+      }
+      console.error(error);
     }
   };
 

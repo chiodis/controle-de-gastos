@@ -38,10 +38,17 @@ export const transacaoService = {
     try {
       const response = await api.post<ITransacao>('/api/transacoes', transacao);
       return response.data;
-    } catch (error: any) {
-      const statusCode = error.response?.status;
-      const apiError = error.response?.data as IErrorResponse;
-      const mensagemErro = apiError?.erro || apiError?.mensagem || error.message;
+    } catch (error: unknown) {
+      let statusCode: number | undefined;
+      let mensagemErro = 'Erro ao criar transação';
+      let apiError: IErrorResponse | undefined;
+
+      if (error && typeof error === 'object' && 'response' in error) {
+        const axiosError = error as { response?: { status: number; data: unknown } };
+        statusCode = axiosError.response?.status;
+        apiError = axiosError.response?.data as IErrorResponse;
+        mensagemErro = apiError?.erro || apiError?.mensagem || 'Erro ao criar transação';
+      }
 
       console.error('Erro ao criar transação:', mensagemErro);
 
@@ -57,10 +64,17 @@ export const transacaoService = {
     try {
       const response = await api.put<ITransacao>(`/api/transacoes/${id}`, transacao);
       return response.data;
-    } catch (error: any) {
-      const statusCode = error.response?.status;
-      const apiError = error.response?.data as IErrorResponse;
-      const mensagemErro = apiError?.erro || apiError?.mensagem || error.message;
+    } catch (error: unknown) {
+      let statusCode: number | undefined;
+      let mensagemErro = `Erro ao atualizar transação com ID ${id}`;
+      let apiError: IErrorResponse | undefined;
+
+      if (error && typeof error === 'object' && 'response' in error) {
+        const axiosError = error as { response?: { status: number; data: unknown } };
+        statusCode = axiosError.response?.status;
+        apiError = axiosError.response?.data as IErrorResponse;
+        mensagemErro = apiError?.erro || apiError?.mensagem || mensagemErro;
+      }
 
       console.error(`Erro ao atualizar transação com ID ${id}:`, mensagemErro);
 

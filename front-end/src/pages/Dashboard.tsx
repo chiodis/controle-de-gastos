@@ -67,7 +67,8 @@ export function Dashboard() {
             </tr>
           </thead>
           <tbody>
-            {relatorioPessoas?.itens.map((item, idx) => (
+            {relatorioPessoas?.itens && relatorioPessoas.itens.length > 0 ? (
+              relatorioPessoas.itens.map((item, idx) => (
               <tr key={idx} style={{ borderBottom: '1px solid #ddd' }}>
                 <td style={{ padding: '10px' }}>{item.nome}</td>
                 <td style={{ padding: '10px', textAlign: 'right', color: 'green' }}>
@@ -88,8 +89,16 @@ export function Dashboard() {
                 </td>
                 <td style={{ padding: '10px', textAlign: 'center' }}>{item.totalTransacoes}</td>
               </tr>
-            ))}
+            ))
+            ) : (
+              <tr>
+                <td colSpan={5} style={{ padding: '20px', textAlign: 'center', color: '#999' }}>
+                  Nenhuma pessoa com transações
+                </td>
+              </tr>
+            )}
             {/* Total Geral por Pessoa */}
+            {relatorioPessoas?.totalGeral && (
             <tr style={{ backgroundColor: '#f9f9f9', borderTop: '2px solid #333', borderBottom: '2px solid #333', fontWeight: 'bold' }}>
               <td style={{ padding: '10px' }}>TOTAL GERAL</td>
               <td style={{ padding: '10px', textAlign: 'right', color: 'green' }}>
@@ -111,6 +120,7 @@ export function Dashboard() {
                 {relatorioPessoas?.totalGeral.totalTransacoes}
               </td>
             </tr>
+            )}
           </tbody>
         </table>
       </div>
@@ -129,7 +139,8 @@ export function Dashboard() {
             </tr>
           </thead>
           <tbody>
-            {relatorioCategories?.itens.map((item, idx) => (
+            {relatorioCategories?.itens && relatorioCategories.itens.length > 0 ? (
+              relatorioCategories.itens.map((item, idx) => (
               <tr key={idx} style={{ borderBottom: '1px solid #ddd' }}>
                 <td style={{ padding: '10px' }}>{item.nome}</td>
                 <td style={{ padding: '10px', textAlign: 'right', color: 'green' }}>
@@ -150,8 +161,16 @@ export function Dashboard() {
                 </td>
                 <td style={{ padding: '10px', textAlign: 'center' }}>{item.totalTransacoes}</td>
               </tr>
-            ))}
+            ))
+            ) : (
+              <tr>
+                <td colSpan={5} style={{ padding: '20px', textAlign: 'center', color: '#999' }}>
+                  Nenhuma categoria com transações
+                </td>
+              </tr>
+            )}
             {/* Total Geral por Categoria */}
+            {relatorioCategories?.totalGeral && (
             <tr style={{ backgroundColor: '#f9f9f9', borderTop: '2px solid #333', borderBottom: '2px solid #333', fontWeight: 'bold' }}>
               <td style={{ padding: '10px' }}>TOTAL GERAL</td>
               <td style={{ padding: '10px', textAlign: 'right', color: 'green' }}>
@@ -173,6 +192,7 @@ export function Dashboard() {
                 {relatorioCategories?.totalGeral.totalTransacoes}
               </td>
             </tr>
+            )}
           </tbody>
         </table>
       </div>

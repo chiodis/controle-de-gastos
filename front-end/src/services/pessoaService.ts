@@ -1,15 +1,7 @@
 import type { IPessoa } from '../types';
 import api from './api';
 
-/**
- * Serviço para operações com Pessoas
- * Responsável por fazer requisições HTTP à API
- */
-
 export const pessoaService = {
-  /**
-   * Obter todas as pessoas
-   */
   obterTodas: async (): Promise<IPessoa[]> => {
     try {
       const response = await api.get<IPessoa[]>('/api/pessoas');
@@ -20,9 +12,6 @@ export const pessoaService = {
     }
   },
 
-  /**
-   * Obter uma pessoa específica por ID
-   */
   obterPorId: async (id: number): Promise<IPessoa> => {
     try {
       const response = await api.get<IPessoa>(`/api/pessoas/${id}`);
@@ -33,9 +22,6 @@ export const pessoaService = {
     }
   },
 
-  /**
-   * Criar uma nova pessoa
-   */
   criar: async (pessoa: IPessoa): Promise<IPessoa> => {
     try {
       const response = await api.post<IPessoa>('/api/pessoas', pessoa);
@@ -46,9 +32,6 @@ export const pessoaService = {
     }
   },
 
-  /**
-   * Atualizar uma pessoa existente
-   */
   atualizar: async (id: number, pessoa: IPessoa): Promise<IPessoa> => {
     try {
       const response = await api.put<IPessoa>(`/api/pessoas/${id}`, pessoa);
@@ -59,9 +42,6 @@ export const pessoaService = {
     }
   },
 
-  /**
-   * Deletar uma pessoa
-   */
   deletar: async (id: number): Promise<void> => {
     try {
       await api.delete(`/api/pessoas/${id}`);

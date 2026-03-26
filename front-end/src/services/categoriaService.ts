@@ -1,15 +1,7 @@
 import type { ICategoria } from '../types';
 import api from './api';
 
-/**
- * Serviço para operações com Categorias
- * Responsável por fazer requisições HTTP à API
- */
-
 export const categoriaService = {
-  /**
-   * Obter todas as categorias
-   */
   obterTodas: async (): Promise<ICategoria[]> => {
     try {
       const response = await api.get<ICategoria[]>('/api/categorias');
@@ -20,9 +12,6 @@ export const categoriaService = {
     }
   },
 
-  /**
-   * Obter uma categoria específica por ID
-   */
   obterPorId: async (id: number): Promise<ICategoria> => {
     try {
       const response = await api.get<ICategoria>(`/api/categorias/${id}`);
@@ -33,9 +22,6 @@ export const categoriaService = {
     }
   },
 
-  /**
-   * Criar uma nova categoria
-   */
   criar: async (categoria: ICategoria): Promise<ICategoria> => {
     try {
       const response = await api.post<ICategoria>('/api/categorias', categoria);
@@ -46,9 +32,6 @@ export const categoriaService = {
     }
   },
 
-  /**
-   * Atualizar uma categoria existente
-   */
   atualizar: async (id: number, categoria: ICategoria): Promise<ICategoria> => {
     try {
       const response = await api.put<ICategoria>(`/api/categorias/${id}`, categoria);
@@ -59,9 +42,6 @@ export const categoriaService = {
     }
   },
 
-  /**
-   * Deletar uma categoria
-   */
   deletar: async (id: number): Promise<void> => {
     try {
       await api.delete(`/api/categorias/${id}`);

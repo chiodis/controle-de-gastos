@@ -3,13 +3,10 @@ import axios from 'axios';
 /**
  * Configuração do Axios para comunicação com a API em C#
  * 
- * A API está rodando em: http://localhost:5012
- * URLs disponíveis:
- * - HTTP: http://localhost:5012
- * - HTTPS: https://localhost:7100
+ * A API está rodando em: http://localhost:5227
  */
 const api = axios.create({
-  baseURL: 'http://localhost:5012',
+  baseURL: 'http://localhost:5227',
   headers: {
     'Content-Type': 'application/json',
   },

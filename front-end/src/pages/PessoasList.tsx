@@ -59,11 +59,12 @@ export function PessoasList() {
           </tr>
         </thead>
         <tbody>
-          {pessoas.map((pessoa) => (
-            <tr key={pessoa.id} style={{ borderBottom: '1px solid #eee' }}>
-              <td style={{ padding: '10px' }}>{pessoa.id}</td>
-              <td style={{ padding: '10px' }}>{pessoa.nome}</td>
-              <td style={{ padding: '10px' }}>{pessoa.descricao || '-'}</td>
+          {pessoas && pessoas.length > 0 ? (
+            pessoas.map((pessoa) => (
+              <tr key={pessoa.id} style={{ borderBottom: '1px solid #eee' }}>
+                <td style={{ padding: '10px' }}>{pessoa.id}</td>
+                <td style={{ padding: '10px' }}>{pessoa.nome}</td>
+                <td style={{ padding: '10px' }}>{pessoa.descricao || '-'}</td>
               <td style={{ padding: '10px', textAlign: 'center' }}>
                 <button
                   onClick={() => navigate(`/pessoas/editar/${pessoa.id}`)}
@@ -78,8 +79,15 @@ export function PessoasList() {
                   Deletar
                 </button>
               </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={4} style={{ padding: '20px', textAlign: 'center', color: '#999' }}>
+                Nenhuma pessoa encontrada
+              </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
 

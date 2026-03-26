@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { categoriaService } from '../services';
+import type { ICategoria } from '../types';
 import { FinalidadeCategoria } from '../types';
-import type { ICategoria, FinalidadeCategoria as FinalidadeCategoriaType } from '../types';
 
 export function CategoriaForm() {
   const { id } = useParams<{ id?: string }>();
@@ -37,7 +37,7 @@ export function CategoriaForm() {
     if (name === 'finalidade') {
       setCategoria({
         ...categoria,
-        [name]: Number(value) as FinalidadeCategoriaType,
+        finalidade: Number(value) as any,
       });
     } else {
       setCategoria({

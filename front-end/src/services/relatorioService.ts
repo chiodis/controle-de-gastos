@@ -4,19 +4,7 @@ import type {
   IRelatorioTotalCategoriasResponse,
 } from '../types';
 
-/**
- * Serviço para operações com Relatórios
- * Responsável por fazer requisições aos endpoints de relatórios da API
- */
-
 export const relatorioService = {
-  /**
-   * Obter relatório consolidado de totais agrupados por Pessoa
-   * 
-   * Retorna:
-   * - Lista de pessoas com: totalReceitas, totalDespesas, saldo e totalTransacoes
-   * - totalGeral consolidado de todas as pessoas
-   */
   obterTotaisPorPessoa: async (): Promise<IRelatorioTotalPessoasResponse> => {
     try {
       const response = await api.get<IRelatorioTotalPessoasResponse>(
@@ -29,13 +17,6 @@ export const relatorioService = {
     }
   },
 
-  /**
-   * Obter relatório consolidado de totais agrupados por Categoria
-   * 
-   * Retorna:
-   * - Lista de categorias com: totalReceitas, totalDespesas, saldo e totalTransacoes
-   * - totalGeral consolidado de todas as categorias
-   */
   obterTotaisPorCategoria: async (): Promise<IRelatorioTotalCategoriasResponse> => {
     try {
       const response = await api.get<IRelatorioTotalCategoriasResponse>(

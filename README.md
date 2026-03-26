@@ -13,12 +13,14 @@ Sistema de controle de gastos pessoais construído com **ASP.NET Core 9.0** (Bac
 ## 🛠️ Stack Tecnológico
 
 ### Backend
+
 - **ASP.NET Core 9.0**
 - **Entity Framework Core**
 - **SQLite**
 - **C#**
 
 ### Frontend
+
 - **React 18+**
 - **TypeScript**
 - **Vite**
@@ -117,11 +119,13 @@ ControleDeGastos/
 ### 🚨 Testes de Validação
 
 **Teste 1: Regra de Menor de Idade**
+
 - Criar uma nova pessoa
 - Tentar fazer uma transação de Receita com ela
 - ❌ Deve dar erro: "Menores de idade não podem registrar receitas"
 
 **Teste 2: Incompatibilidade de Categoria**
+
 - Tentar registrar Receita em categoria de Despesa
 - ❌ Deve dar erro: "Categoria não é compatível com o tipo"
 
@@ -140,23 +144,27 @@ Migrations já foram aplicadas. Não é necessário fazer nada especial.
 ### Backend (ASP.NET Core)
 
 **Controllers:**
+
 - `PessoasController` - CRUD de Pessoas
 - `CategoriasController` - CRUD de Categorias
 - `TransacoesController` - CRUD de Transações com validações
 - `RelatoriosController` - Endpoints de relatórios
 
 **Services:**
+
 - `PessoaService` - Lógica de pessoas
 - `CategoriaService` - Lógica de categorias
 - `TransacaoService` - Lógica de transações + 2 validações críticas
 
 **Validações Implementadas:**
+
 1. Menores de idade (< 18 anos) só podem registrar Despesas
 2. Tipo de transação deve ser compatível com Finalidade da Categoria
 
 ### Frontend (React)
 
 **Páginas:**
+
 - `Dashboard.tsx` - Relatórios consolidados
 - `PessoasList.tsx` - Lista e gerenciamento de pessoas
 - `PessoaForm.tsx` - Criar/editar pessoa
@@ -166,6 +174,7 @@ Migrations já foram aplicadas. Não é necessário fazer nada especial.
 - `TransacaoForm.tsx` - Criar/editar transação
 
 **Services:**
+
 - `pessoaService.ts` - Chamadas API de pessoas
 - `categoriaService.ts` - Chamadas API de categorias
 - `transacaoService.ts` - Chamadas API de transações
@@ -181,9 +190,9 @@ Localização: `front-end/src/services/api.ts`
 
 ```javascript
 const api = axios.create({
-  baseURL: 'http://localhost:5227',  // ← Porta do backend
+  baseURL: "http://localhost:5227", // ← Porta do backend
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 ```
@@ -205,14 +214,17 @@ Localização: `ControleGastos.Api/appsettings.json`
 ## 🐛 Troubleshooting
 
 **Erro: "Erro ao carregar transações"**
+
 - Verifique se o backend está rodando em http://localhost:5227
 - Verifique se o frontend está apontando para a porta correta em `api.ts`
 
 **Erro: "Failed to bind to address"**
+
 - Talvez a porta 5227 já esteja em uso
 - Mate os processos antigos e reinicie
 
 **Erro de conexão do Frontend**
+
 - Certifique-se que ambos servidor estão rodando
 - Abra DevTools (F12) e verifique console para erros de rede
 
@@ -221,12 +233,14 @@ Localização: `ControleGastos.Api/appsettings.json`
 ## 📦 Dependências Principais
 
 ### Backend
+
 ```
 Microsoft.EntityFrameworkCore.Sqlite
 Microsoft.AspNetCore.Mvc
 ```
 
 ### Frontend
+
 ```
 react: ^18.x
 typescript: ^5.x
@@ -237,26 +251,22 @@ react-router-dom: ^6.x
 
 ---
 
-## ✅ Checklist de Entrega
-
-Antes de enviar para o recrutador:
+## ✅ Testes Antes de Usar
 
 - [ ] Backend compilando sem erros
 - [ ] Frontend compilando sem erros (npm run build)
-- [ ] Ambos servidores rodando sem problemas
-- [ ] Testou: create, read, update, delete de Pessoas
-- [ ] Testou: create, read, update, delete de Categorias
-- [ ] Testou: create, read, update, delete de Transações
-- [ ] Testou: Dashboard com dados corretos
-- [ ] Testou: Validação de menor de idade
-- [ ] Testou: Validação de compatibilidade de categoria
-- [ ] README.md completo e claro
+- [ ] Ambos servidores rodando corretamente
+- [ ] CRUD funcionando: Pessoas, Categorias, Transações
+- [ ] Dashboard exibindo dados corretamente
+- [ ] Validação de menor de idade funcionando
+- [ ] Validação de compatibilidade de categoria funcionando
 
 ---
 
 ## 📞 Suporte
 
 Se tiver problemas:
+
 1. Verifique os logs do terminal
 2. Abra DevTools (F12) no navegador
 3. Verifique se portas 5227 e 5173 estão livres
@@ -264,4 +274,4 @@ Se tiver problemas:
 
 ---
 
-**Desenvolvido para teste técnico - Nível Júnior**
+**Desenvolvido como projeto fullstack de controle de gastos**

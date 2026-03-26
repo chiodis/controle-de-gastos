@@ -1,15 +1,6 @@
 import api from './api';
 import type { ITransacao, IErrorResponse } from '../types';
 
-/**
- * Serviço para operações com Transações
- * Responsável por fazer requisições HTTP à API
- * 
- * ⚠️ VALIDAÇÕES APLICADAS NA API:
- * 1. Menores de 18 anos só podem registrar Despesas
- * 2. A finalidade da categoria deve ser compatível com o tipo de transação
- */
-
 export class TransacaoServiceError extends Error {
   public statusCode?: number;
   public apiError?: IErrorResponse;
@@ -23,9 +14,6 @@ export class TransacaoServiceError extends Error {
 }
 
 export const transacaoService = {
-  /**
-   * Obter todas as transações
-   */
   obterTodas: async (): Promise<ITransacao[]> => {
     try {
       const response = await api.get<ITransacao[]>('/api/transacoes');
@@ -36,9 +24,6 @@ export const transacaoService = {
     }
   },
 
-  /**
-   * Obter uma transação específica por ID
-   */
   obterPorId: async (id: number): Promise<ITransacao> => {
     try {
       const response = await api.get<ITransacao>(`/api/transacoes/${id}`);
@@ -49,15 +34,6 @@ export const transacaoService = {
     }
   },
 
-  /**
-   * Criar uma nova transação COM VALIDAÇÕES
-   * 
-   * ⚠️ VALIDAÇÕES DA API:
-   * 1. Regra de Menor de Idade: Se pessoa < 18 anos e tipo = Receita
-   *    → Lança erro: "Menores de idade só podem registrar transações do tipo Despesa"
-   * 2. Regra de Finalidade da Categoria: Tipo deve ser compatível com Finalidade
-   *    → Lança erro: "A finalidade da categoria não é compatível com o tipo da transação"
-   */
   criar: async (transacao: ITransacao): Promise<ITransacao> => {
     try {
       const response = await api.post<ITransacao>('/api/transacoes', transacao);
@@ -77,11 +53,6 @@ export const transacaoService = {
     }
   },
 
-  /**
-   * Atualizar uma transação COM VALIDAÇÕES
-   * 
-   * Aplica as mesmas validações do método criar()
-   */
   atualizar: async (id: number, transacao: ITransacao): Promise<ITransacao> => {
     try {
       const response = await api.put<ITransacao>(`/api/transacoes/${id}`, transacao);
@@ -101,9 +72,6 @@ export const transacaoService = {
     }
   },
 
-  /**
-   * Deletar uma transação
-   */
   deletar: async (id: number): Promise<void> => {
     try {
       await api.delete(`/api/transacoes/${id}`);

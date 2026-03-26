@@ -90,11 +90,12 @@ export function TransacoesList() {
           </tr>
         </thead>
         <tbody>
-          {transacoes.map((transacao) => (
-            <tr key={transacao.id} style={{ borderBottom: '1px solid #ddd' }}>
-              <td style={{ padding: '10px' }}>{transacao.pessoa?.nome || '-'}</td>
-              <td style={{ padding: '10px' }}>{transacao.categoria?.nome || '-'}</td>
-              <td style={{ padding: '10px' }}>{transacao.descricao}</td>
+          {transacoes && transacoes.length > 0 ? (
+            transacoes.map((transacao) => (
+              <tr key={transacao.id} style={{ borderBottom: '1px solid #ddd' }}>
+                <td style={{ padding: '10px' }}>{transacao.pessoa?.nome || '-'}</td>
+                <td style={{ padding: '10px' }}>{transacao.categoria?.nome || '-'}</td>
+                <td style={{ padding: '10px' }}>{transacao.descricao}</td>
               <td
                 style={{
                   padding: '10px',
@@ -135,8 +136,15 @@ export function TransacoesList() {
                   Deletar
                 </button>
               </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={6} style={{ padding: '20px', textAlign: 'center', color: '#999' }}>
+                Nenhuma transação encontrada
+              </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
 

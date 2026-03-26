@@ -86,50 +86,52 @@ export function CategoriasList() {
           </tr>
         </thead>
         <tbody>
-          {categorias.map((categoria) => (
-            <tr key={categoria.id} style={{ borderBottom: '1px solid #ddd' }}>
-              <td style={{ padding: '10px' }}>{categoria.nome}</td>
-              <td style={{ padding: '10px' }}>{categoria.descricao}</td>
-              <td style={{ padding: '10px' }}>{getNomeFinalidade(categoria.finalidade)}</td>
-              <td style={{ padding: '10px', textAlign: 'center' }}>
-                <button
-                  onClick={() => navigate(`/categorias/editar/${categoria.id}`)}
-                  style={{
-                    padding: '5px 10px',
-                    marginRight: '10px',
-                    backgroundColor: '#28a745',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Editar
-                </button>
-                <button
-                  onClick={() => handleDelete(categoria.id!)}
-                  style={{
-                    padding: '5px 10px',
-                    backgroundColor: '#dc3545',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Deletar
-                </button>
+          {categorias && categorias.length > 0 ? (
+            categorias.map((categoria) => (
+              <tr key={categoria.id} style={{ borderBottom: '1px solid #ddd' }}>
+                <td style={{ padding: '10px' }}>{categoria.nome}</td>
+                <td style={{ padding: '10px' }}>{categoria.descricao}</td>
+                <td style={{ padding: '10px' }}>{getNomeFinalidade(categoria.finalidade)}</td>
+                <td style={{ padding: '10px', textAlign: 'center' }}>
+                  <button
+                    onClick={() => navigate(`/categorias/editar/${categoria.id}`)}
+                    style={{
+                      padding: '5px 10px',
+                      marginRight: '10px',
+                      backgroundColor: '#28a745',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '4px',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    onClick={() => handleDelete(categoria.id!)}
+                    style={{
+                      padding: '5px 10px',
+                      backgroundColor: '#dc3545',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '4px',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Deletar
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={4} style={{ padding: '20px', textAlign: 'center', color: '#999' }}>
+                Nenhuma categoria encontrada
               </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
-
-      {categorias.length === 0 && !loading && (
-        <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
-          Nenhuma categoria encontrada.
-        </div>
-      )}
     </div>
   );
 }

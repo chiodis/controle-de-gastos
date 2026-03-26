@@ -17,26 +17,22 @@ namespace ControleGastos.Api.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configuração de Cascade Delete para Pessoa -> Transacao
             modelBuilder.Entity<Transacao>()
                 .HasOne(t => t.Pessoa)
                 .WithMany(p => p.Transacoes)
                 .HasForeignKey(t => t.PessoaId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Configuração de Cascade Delete para Categoria -> Transacao (opcional)
             modelBuilder.Entity<Transacao>()
                 .HasOne(t => t.Categoria)
                 .WithMany(c => c.Transacoes)
                 .HasForeignKey(t => t.CategoriaId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Configuração de decimal para Valor
             modelBuilder.Entity<Transacao>()
                 .Property(t => t.Valor)
                 .HasPrecision(18, 2);
 
-            // Índices para melhor performance
             modelBuilder.Entity<Pessoa>()
                 .HasIndex(p => p.Nome);
 

@@ -1,9 +1,5 @@
 namespace ControleGastos.Api.Models.Exceptions
 {
-    /// <summary>
-    /// Exceção lançada quando um menor de idade tenta registrar uma transação do tipo Receita.
-    /// Menores de idade só podem registrar transações do tipo Despesa.
-    /// </summary>
     public class MenorDeIdadeComReceita : Exception
     {
         public MenorDeIdadeComReceita()

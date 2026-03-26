@@ -14,8 +14,6 @@ namespace ControleGastos.Api.Models
         public string Descricao { get; set; }
 
         public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
-
-        // Navegação
         public ICollection<Transacao> Transacoes { get; set; } = new List<Transacao>();
     }
 }

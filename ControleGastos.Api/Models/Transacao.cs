@@ -22,7 +22,6 @@ namespace ControleGastos.Api.Models
 
         public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
 
-        // Chaves estrangeiras
         [Required(ErrorMessage = "Pessoa é obrigatória")]
         [ForeignKey("Pessoa")]
         public int PessoaId { get; set; }
@@ -31,7 +30,6 @@ namespace ControleGastos.Api.Models
         [ForeignKey("Categoria")]
         public int CategoriaId { get; set; }
 
-        // Navegação
         public Pessoa Pessoa { get; set; }
         public Categoria Categoria { get; set; }
     }

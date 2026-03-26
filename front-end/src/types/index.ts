@@ -1,5 +1,3 @@
-// Enums e Tipos para a aplicação de Controle de Gastos
-
 export const TipoTransacao = { Receita: 1, Despesa: 2 } as const;
 export type TipoTransacao = typeof TipoTransacao[keyof typeof TipoTransacao];
 

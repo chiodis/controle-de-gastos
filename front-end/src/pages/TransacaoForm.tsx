@@ -115,7 +115,6 @@ export function TransacaoForm() {
       }
       navigate('/transacoes');
     } catch (err: any) {
-      // Capturar erros específicos de validação do backend
       if (err instanceof TransacaoServiceError) {
         setErro(err.message);
       } else {

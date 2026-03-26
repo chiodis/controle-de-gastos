@@ -24,7 +24,6 @@ namespace ControleGastos.Api.Services
 
         public async Task<Transacao> CriarAsync(Transacao transacao)
         {
-            // Validar existência de Pessoa e Categoria
             var pessoa = await _context.Pessoas.FindAsync(transacao.PessoaId);
             var categoria = await _context.Categorias.FindAsync(transacao.CategoriaId);
 
@@ -33,12 +32,10 @@ namespace ControleGastos.Api.Services
             if (categoria == null)
                 throw new KeyNotFoundException($"Categoria com ID {transacao.CategoriaId} não encontrada");
 
-            // Validação 1: Menor de idade NÃO pode ter Receita
             var idade = CalcularIdade(pessoa.DataCriacao);
             if (idade < 18 && transacao.Tipo == TipoTransacao.Receita)
                 throw new InvalidOperationException($"Pessoa com {idade} anos não pode registrar Receita");
 
-            // Validação 2: Tipo deve ser compatível com Finalidade da Categoria
             if (!ValidarCompatibilidade(transacao.Tipo, categoria.Finalidade))
                 throw new InvalidOperationException($"Categoria '{categoria.Nome}' não é compatível com {transacao.Tipo}");
 
@@ -61,12 +58,10 @@ namespace ControleGastos.Api.Services
             if (categoria == null)
                 throw new KeyNotFoundException($"Categoria com ID {transacao.CategoriaId} não encontrada");
 
-            // Validação 1: Menor de idade NÃO pode ter Receita
             var idade = CalcularIdade(pessoa.DataCriacao);
             if (idade < 18 && transacao.Tipo == TipoTransacao.Receita)
                 throw new InvalidOperationException($"Pessoa com {idade} anos não pode registrar Receita");
 
-            // Validação 2: Tipo deve ser compatível com Finalidade da Categoria
             if (!ValidarCompatibilidade(transacao.Tipo, categoria.Finalidade))
                 throw new InvalidOperationException($"Categoria '{categoria.Nome}' não é compatível com {transacao.Tipo}");
 
@@ -91,7 +86,6 @@ namespace ControleGastos.Api.Services
             await _context.SaveChangesAsync();
         }
 
-        // Calcula idade baseada em DataCriacao
         private int CalcularIdade(DateTime dataCriacao)
         {
             var hoje = DateTime.UtcNow;
@@ -101,7 +95,6 @@ namespace ControleGastos.Api.Services
             return idade;
         }
 
-        // Valida compatibilidade entre tipo e finalidade
         private bool ValidarCompatibilidade(TipoTransacao tipo, FinalidadeCategoria finalidade)
         {
             return (tipo, finalidade) switch
